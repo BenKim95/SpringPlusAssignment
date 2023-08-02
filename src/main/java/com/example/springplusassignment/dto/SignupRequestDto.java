@@ -9,7 +9,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class SignupRequestDto {
 
-    private String nickname;
+    private String username;
     private String password;
     private String passwordConfirm;
     private String email;
