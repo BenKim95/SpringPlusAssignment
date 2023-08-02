@@ -21,13 +21,13 @@ public class UserController {
     private final UserService userService;
 
     // 회원가입
-    @PostMapping("/signup")
+    @PostMapping("/user/signup")
     public ResponseEntity <ApiResponseDto> signup (@Valid @RequestBody SignupRequestDto signupRequestDto) {
          return userService.signup(signupRequestDto);
     }
 
     // 로그인
-    @PostMapping("login")
+    @PostMapping("/user/login")
     public ResponseEntity <ApiResponseDto> login (@RequestBody LoginRequestDto loginRequestDto, HttpServletResponse httpServletResponse) {
         return userService.login(loginRequestDto, httpServletResponse);
     }

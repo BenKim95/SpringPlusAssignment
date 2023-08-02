@@ -50,8 +50,7 @@ public class UserService {
             return ResponseEntity.status(400).body(new ApiResponseDto(HttpStatus.BAD_REQUEST, "아이디가 들어간 비밀번호는 사용할 수 없습니다."));
         }
 
-        User user = new User(nickname, passwordEncoder.encode(password), email);
-        userRepository.save(user);
+        userRepository.save(new User(nickname, password, email));
         return ResponseEntity.status(202).body(new ApiResponseDto(HttpStatus.ACCEPTED, "회원가입이 완료되었습니다."));
     }
 
@@ -69,8 +68,12 @@ public class UserService {
             return ResponseEntity.status(400).body(new ApiResponseDto(HttpStatus.BAD_REQUEST, "비밀번호가 일치하지 않습니다."));
         }
 
-        httpServletResponse.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(user.get().getNickname()));
-        jwtUtil.addJwtToCookie(jwtUtil.createToken(user.get().getNickname()), httpServletResponse);
+//        httpServletResponse.addHeader(com.sparta.springauth.jwt.JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(user.get().getNickname()));
+//        jwtUtil.addJwtToCookie(jwtUtil.createToken(user.get().getNickname()), httpServletResponse);
+
+        String token = jwtUtil.createToken(user.get().getNickname());
+        jwtUtil.addJwtToCookie(token, httpServletResponse);
+
         return ResponseEntity.status(202).body(new ApiResponseDto(HttpStatus.ACCEPTED, "로그인 되었습니다."));
     }
 }

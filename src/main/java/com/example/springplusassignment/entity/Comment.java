@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table (name = "comments")
-public class Comment {
+public class Comment extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

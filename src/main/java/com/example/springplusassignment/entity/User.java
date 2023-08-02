@@ -1,7 +1,6 @@
 package com.example.springplusassignment.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,22 +10,24 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name = "users")
-public class User {
+public class User extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column (nullable = false, unique = true)
-//    @Pattern(regexp = "^[a-zA-Z0-9]+")
     private String nickname;
 
     @Column (nullable = false)
-//    @Pattern(regexp = "^[a-zA-Z0-9]{4,10}$")
     private String password;
 
     @Column (nullable = false, unique = true)
     private String email;
+
+//    @Column(nullable = false)
+//    @Enumerated(value = EnumType.STRING) // Enum타입을 String으로 DB에 저장
+//    private UserRoleEnum roleEnum;
 
     public User(String nickname, String password, String email) {
         this.nickname = nickname;
