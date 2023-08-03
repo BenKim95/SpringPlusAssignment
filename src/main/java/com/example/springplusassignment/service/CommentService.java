@@ -31,7 +31,6 @@ public class CommentService {
             return ResponseEntity.status(400).body(new ApiResponseDto(HttpStatus.BAD_REQUEST, "존재하지 않는 게시글에 댓글을 달 수 없습니다."));
         }
 
-
         commentRepository.save(new Comment(contents, post.get(), user));
         return ResponseEntity.status(201).body(new ApiResponseDto(HttpStatus.CREATED, "댓글 작성 완료"));
     }
@@ -62,6 +61,7 @@ public class CommentService {
         } else if (!comment.get().getUser().getId().equals(user.getId())) {
             return ResponseEntity.status(400).body(new ApiResponseDto(HttpStatus.BAD_REQUEST, "댓글 작성자만 삭제할 수 있습니다."));
         }
+
         commentRepository.delete(comment.get());
         return ResponseEntity.status(202).body(new ApiResponseDto(HttpStatus.ACCEPTED, "댓글 삭제 완료"));
     }

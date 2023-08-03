@@ -3,9 +3,11 @@ package com.example.springplusassignment.service;
 import com.example.springplusassignment.dto.ApiResponseDto;
 import com.example.springplusassignment.dto.PostRequestDto;
 import com.example.springplusassignment.dto.PostResponseDto;
+import com.example.springplusassignment.entity.Comment;
 import com.example.springplusassignment.entity.Post;
 import com.example.springplusassignment.entity.User;
 import com.example.springplusassignment.jwt.JwtUtil;
+import com.example.springplusassignment.repository.CommentRepository;
 import com.example.springplusassignment.repository.PostRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
 
 
     // Post 작성
@@ -52,12 +55,13 @@ public class PostService {
     }
 
     // Post 단건 조회
-    public PostResponseDto showPost(Long id) {
+    public PostResponseDto showPost(Long id, User user) {
        Optional <Post> post = postRepository.findById(id);
        if (post.isEmpty()) {
-           throw new IllegalArgumentException("Post가 존재하지 않습니다.");
+           throw new IllegalArgumentException("게시글이 존재하지 않습니다.");
        }
-        return new PostResponseDto(post.get());
+       List<Comment> commentList = commentRepository.findAllByUser(user);
+        return new PostResponseDto(post.get(), commentList);
     }
 
     // Post 수정
@@ -88,6 +92,4 @@ public class PostService {
        postRepository.delete(post.get());
         return ResponseEntity.status(200).body(new ApiResponseDto(HttpStatus.OK, "게시글 삭제 완료"));
     }
-
-
 }

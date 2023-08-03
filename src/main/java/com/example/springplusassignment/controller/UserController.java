@@ -3,7 +3,6 @@ package com.example.springplusassignment.controller;
 import com.example.springplusassignment.dto.ApiResponseDto;
 import com.example.springplusassignment.dto.LoginRequestDto;
 import com.example.springplusassignment.dto.SignupRequestDto;
-import com.example.springplusassignment.jwt.JwtUtil;
 import com.example.springplusassignment.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
