@@ -6,6 +6,7 @@ import com.example.springplusassignment.dto.SignupRequestDto;
 import com.example.springplusassignment.entity.User;
 import com.example.springplusassignment.jwt.JwtUtil;
 import com.example.springplusassignment.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

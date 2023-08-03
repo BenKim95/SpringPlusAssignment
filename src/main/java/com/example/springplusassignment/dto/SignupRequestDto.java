@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class SignupRequestDto {
-
     private String username;
     private String password;
     private String passwordConfirm;
